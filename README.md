@@ -13,7 +13,7 @@ This image allows the user to define environment variables that will reflect on 
 
 Those variables are:
 
-* GEN_NONCE: any value your nodes agree upon, the default is "0x0000000000009999"
+* GEN_NONCE: any value your nodes agree upon, the default is "0xeddeadbabeeddead"
 * NET_ID: any integer value your nodes agree upon, the default is 1981
 
 The GEN_NONCE variable is used during the start script to create the "genesis.json" used when initializing the blockchain. Similarly, the NET_ID variable defines the "network_id" of the network. All members of the private network must have the same genesis block and network_id, so all you'll have to do is run the containers with the same "-e" arguments for these variables (the provided scripts do it).

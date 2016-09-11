@@ -4,7 +4,7 @@ FROM ethereum/client-go
 
 MAINTAINER Andre Fernandes <andre@vertigo.com.br>
 
-ENV GEN_NONCE="0x0000000000009999" \
+ENV GEN_NONCE="0xeddeadbabeeddead" \
     DATA_DIR="/root/.ethereum" \
     CHAIN_TYPE="private" \
     RUN_BOOTNODE=false \
