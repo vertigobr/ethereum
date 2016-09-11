@@ -1,10 +1,8 @@
 #!/bin/sh
 #
-# Executa bootnode
+# Runs a bootnode
 #
-# Se houver NET_ID repassa para o container como --environment
-# Senão vale o default do Dockerfile:
-# NET_ID=1972
+# If there is a NET_ID variable it is passed on to the container.
 #
 docker stop ethereum-bootnode
 docker rm ethereum-bootnode
@@ -19,4 +17,4 @@ docker run -d --name ethereum-bootnode \
     -e "RUN_BOOTNODE=true" \
     $NET_ARG \
     $GEN_ARG \
-    bacen/ethereum --verbosity=3
+    vertigo/ethereum --verbosity=3
