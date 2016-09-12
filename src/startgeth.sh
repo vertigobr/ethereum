@@ -21,8 +21,8 @@ if [ "$CHAIN_TYPE" == "private" ]; then
   # empty datadir -> geth init
   DATA_DIR=${DATA_DIR:-"/root/.ethereum"}
   echo "DATA_DIR=$DATA_DIR"
-  if [ ! -d "$DATA_DIR" ]; then
-      echo "DATA_DIR '$DATA_DIR' non existant. Initializing DATA_DIR..."
+  if [ ! -d "$DATA_DIR" ] || [ -d "ls -A $DATA_DIR" ]; then
+      echo "DATA_DIR '$DATA_DIR' non existant or empty. Initializing DATA_DIR..."
       geth --datadir "$DATA_DIR" init /opt/genesis.json
   fi
   GEN_ARGS="--datadir $DATA_DIR"
