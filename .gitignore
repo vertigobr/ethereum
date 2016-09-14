@@ -1,3 +1,4 @@
 .ether-*
 .bootnode
+setenv.sh
 

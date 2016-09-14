@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# UNCOMMENT AND COMPLETE FOR CARINA
+export CARINA_USERNAME=user@mail
+export CARINA_APIKEY=thisisonlyyours
+export CARINA_CLUSTER=ethereum
+
+# UNCOMMENT BELOW AND COMPLETE FOR AZURE CLI
+export AZURE_TEMPLATE_URL=https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-acs-swarm/azuredeploy.json
+export AZURE_RESOURCE_GROUP="EthereumPlayground"
+export AZURE_DEPLOYMENT_NAME="EthereumSwarm"
+export AZURE_LOCATION=eastus
+# the DNS prefix you should change
+export AZURE_DNS_PREFIX=ethereum-playground
+export AZURE_DEPLOY_JSON=`cat ./azure/azuredeploy.parameters.json`
+# UNCOMMENT TO READ PUBLIC KEY INTO VAR AND SUBST IN PARAMETER FILE
+export AZURE_PUB_KEY=`cat ~/.ssh/id_rsa.pub`
+sed "s%\$AZURE_PUB_KEY%$AZURE_PUB_KEY%" azure/azuredeploy.parameters.json.template | \
+  sed "s%\$AZURE_DNS_PREFIX%$AZURE_DNS_PREFIX%" > azure/azuredeploy.parameters.json

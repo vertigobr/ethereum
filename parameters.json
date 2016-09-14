@@ -1,0 +1,45 @@
+{
+  "provisioningState": "",
+  "orchestratorProfile": {
+    "orchestratorType": null
+  },
+  "masterProfile": {
+    "count": null,
+    "dnsPrefix": "",
+    "fqdn": ""
+  },
+  "agentPoolProfiles": [
+    {
+      "name": "",
+      "count": null,
+      "vmSize": "",
+      "dnsPrefix": "",
+      "fqdn": ""
+    }
+  ],
+  "windowsProfile": {
+    "adminUsername": "",
+    "adminPassword": ""
+  },
+  "linuxProfile": {
+    "adminUsername": "",
+    "ssh": {
+      "publicKeys": [
+        {
+          "keyData": ""
+        }
+      ]
+    }
+  },
+  "diagnosticsProfile": {
+    "vmDiagnostics": {
+      "enabled": null,
+      "storageUri": ""
+    }
+  },
+  "id": null,
+  "name": null,
+  "type": null,
+  "location": "",
+  "tags": {}
+}
