@@ -24,7 +24,8 @@ echo "Running ethereum node with CHAIN_TYPE=$CHAIN_TYPE"
 if [ "$CHAIN_TYPE" == "private" ]; then
   # empty datadir -> geth init
   DATA_DIR=${DATA_DIR:-"/root/.ethereum"}
-  echo "DATA_DIR=$DATA_DIR"
+  echo "DATA_DIR=$DATA_DIR, contents:"
+  ls -la $DATA_DIR
   if [ ! -d "$DATA_DIR" ] || [ -d "ls -A $DATA_DIR" ]; then
       echo "DATA_DIR '$DATA_DIR' non existant or empty. Initializing DATA_DIR..."
       geth --datadir "$DATA_DIR" init /opt/genesis.json
@@ -32,6 +33,7 @@ if [ "$CHAIN_TYPE" == "private" ]; then
   GEN_ARGS="--datadir $DATA_DIR"
 #  [[ ! -z $NET_ID ]] && GEN_ARGS="$GEN_ARGS --networkid=$NET_ID"
 #  [[ ! -z $MY_IP ]] && GEN_ARGS="$GEN_ARGS --nat=extip:$MY_IP"
+  GEN_ARGS="$GEN_ARGS --nat=any"
   [[ ! -z $BOOTNODE_URL ]] && GEN_ARGS="--bootnodes=$BOOTNODE_URL $GEN_ARGS"
 fi
 
@@ -46,6 +48,7 @@ if [ "$RUN_BOOTNODE" == "true" ]; then
     [[ -z $BOOTNODE_SERVICE ]] && BOOTNODE_SERVICE=$MY_IP
     echo "Running bootnode with arguments '--nodekey=$KEY_FILE --addr $BOOTNODE_SERVICE:30301 $@'"
     exec /usr/local/bin/bootnode --nodekey="$KEY_FILE" --addr "$BOOTNODE_SERVICE:30301" "$@"
+#    exec /usr/local/bin/bootnode --nodekey="$KEY_FILE" "$@"
 fi
 
 echo "Running geth with arguments $GEN_ARGS $@"

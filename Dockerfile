@@ -19,6 +19,7 @@ WORKDIR /opt
 
 # bootnode port
 EXPOSE 30301
+EXPOSE 30301/udp
 
 ADD src/* /opt/
 RUN chmod +x /opt/*.sh

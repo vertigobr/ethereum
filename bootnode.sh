@@ -11,13 +11,17 @@ IMGVERSION=${IMGVERSION:-"latest"}
 IMGNAME=$(head -n 1 .IMGNAME)
 NET_ARG=
 GEN_ARG=
-[[ ! -z $NET_ID ]] && NET_ARG="-e NET_ID=$NET_ID"
+#[[ ! -z $NET_ID ]] && NET_ARG="-e NET_ID=$NET_ID"
 [[ ! -z $GEN_ALLOC ]] && GEN_ARG="-e GEN_ALLOC=$GEN_ALLOC"
+DATA_ROOT=${DATA_ROOT:-$(pwd)}
 docker run -d --name ethereum-bootnode \
-    -v $(pwd)/.bootnode:/opt/bootnode \
-    -p 30301:30301 \
-    -p 30301:30301/udp \
+    -v $DATA_ROOT/.bootnode:/opt/bootnode \
+    --network ethereum \
     -e "RUN_BOOTNODE=true" \
     $NET_ARG \
     $GEN_ARG \
-    $IMGNAME:$IMGVERSION --verbosity=3
+    $IMGNAME:$IMGVERSION --verbosity=5
+
+#    -p 30301:30301 \
+#    -p 30301:30301/udp \
+
