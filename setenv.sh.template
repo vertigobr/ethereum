@@ -10,10 +10,21 @@ export AZURE_TEMPLATE_URL=https://raw.githubusercontent.com/Azure/azure-quicksta
 export AZURE_RESOURCE_GROUP="EthereumPlayground"
 export AZURE_DEPLOYMENT_NAME="EthereumSwarm"
 export AZURE_LOCATION=eastus
-# the DNS prefix you should change
 export AZURE_DNS_PREFIX=ethereum-playground
 export AZURE_DEPLOY_JSON=`cat ./azure/azuredeploy.parameters.json`
 # UNCOMMENT TO READ PUBLIC KEY INTO VAR AND SUBST IN PARAMETER FILE
 export AZURE_PUB_KEY=`cat ~/.ssh/id_rsa.pub`
 sed "s%\$AZURE_PUB_KEY%$AZURE_PUB_KEY%" azure/azuredeploy.parameters.json.template | \
   sed "s%\$AZURE_DNS_PREFIX%$AZURE_DNS_PREFIX%" > azure/azuredeploy.parameters.json
+
+# UNCOMMENT BELOW AND COMPLETE FOR AZURE ON DOCKER-MACHINE
+export AZUREDM_LOCATION=eastus
+export AZUREDM_RESOURCE_GROUP="EthereumDMPlayground"
+export AZUREDM_SUBSCRIPTION_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+# UNCOMMENT BELOW AND COMPLETE FOR AMAZON ECS OR AMAZON AWS (docker-machine)
+export AWS_ACCESS_KEY_ID=xxxxxxxxxxxxxxxxxxxx
+export AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+export AWS_REGION=us-east-1
+export AWS_SUBNET=b
+export AWS_CLUSTER=ethereum-playground

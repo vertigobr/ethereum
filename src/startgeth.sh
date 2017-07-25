@@ -43,8 +43,9 @@ if [ "$RUN_BOOTNODE" == "true" ]; then
        echo "(creating $KEY_FILE)"
        bootnode --genkey="$KEY_FILE"
     fi
-    echo "Running bootnode with arguments '--nodekey=$KEY_FILE --addr $MY_IP:30301 $@'"
-    exec /usr/local/bin/bootnode --nodekey="$KEY_FILE" --addr "$MY_IP:30301" "$@"
+    [[ -z $BOOTNODE_SERVICE ]] && BOOTNODE_SERVICE=$MY_IP
+    echo "Running bootnode with arguments '--nodekey=$KEY_FILE --addr $BOOTNODE_SERVICE:30301 $@'"
+    exec /usr/local/bin/bootnode --nodekey="$KEY_FILE" --addr "$BOOTNODE_SERVICE:30301" "$@"
 fi
 
 echo "Running geth with arguments $GEN_ARGS $@"
