@@ -1,6 +1,6 @@
 # Ethereum playground for private networks
 #
-FROM ethereum/client-go
+FROM vertigo/go-ethereum:v1.6.7-all
 
 MAINTAINER Andre Fernandes <andre@vertigo.com.br>
 
@@ -8,13 +8,8 @@ ENV GEN_NONCE="0xeddeadbabeeddead" \
     DATA_DIR="/root/.ethereum" \
     CHAIN_TYPE="private" \
     RUN_BOOTNODE=false \
-    NET_ID=1981 \
+    GEN_CHAIN_ID=1981 \
     BOOTNODE_URL=""
-
-RUN apt-get update -y && \
-    apt-get install -y bootnode iproute2 && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /opt
 
@@ -26,6 +21,7 @@ WORKDIR /opt
 EXPOSE 30301
 
 ADD src/* /opt/
+RUN chmod +x /opt/*.sh
 
 ENTRYPOINT ["/opt/startgeth.sh"]
 

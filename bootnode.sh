@@ -6,6 +6,9 @@
 #
 docker stop ethereum-bootnode
 docker rm ethereum-bootnode
+IMGVERSION=$(head -n 1 .IMGVERSION)
+IMGVERSION=${IMGVERSION:-"latest"}
+IMGNAME=$(head -n 1 .IMGNAME)
 NET_ARG=
 GEN_ARG=
 [[ ! -z $NET_ID ]] && NET_ARG="-e NET_ID=$NET_ID"
@@ -17,4 +20,4 @@ docker run -d --name ethereum-bootnode \
     -e "RUN_BOOTNODE=true" \
     $NET_ARG \
     $GEN_ARG \
-    vertigo/ethereum --verbosity=3
+    $IMGNAME:$IMGVERSION --verbosity=3

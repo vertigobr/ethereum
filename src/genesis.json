@@ -1,5 +1,11 @@
 {
-  "alloc"      : {
+  "config": {
+    "chainId": ${GEN_CHAIN_ID},
+    "homesteadBlock": 0,
+    "eip155Block": 0,
+    "eip158Block": 0
+  },
+    "alloc"      : {
     ${GEN_ALLOC}
   },
   "coinbase"   : "0x0000000000000000000000000000000000000000",

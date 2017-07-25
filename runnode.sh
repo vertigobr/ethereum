@@ -1,4 +1,7 @@
 #!/bin/bash
+IMGVERSION=$(head -n 1 .IMGVERSION)
+IMGVERSION=${IMGVERSION:-"latest"}
+IMGNAME=$(head -n 1 .IMGNAME)
 NODE_NAME=$1
 NODE_NAME=${NODE_NAME:-"node1"}
 CONTAINER_NAME="ethereum-$NODE_NAME"
@@ -21,4 +24,4 @@ docker run -d --name $CONTAINER_NAME \
     -v $DATA_ROOT/.ether-$NODE_NAME:/root \
     -e "BOOTNODE_URL=$BOOTNODE_URL" \
     $NET_ARG $GEN_ARG $RPC_PORTMAP $UDP_PORTMAP \
-    vertigo/ethereum $RPC_ARG --identity $NODE_NAME --cache=512 --verbosity=5 --maxpeers=3 ${@:2}
+    $IMGNAME:$IMGVERSION $RPC_ARG --identity $NODE_NAME --cache=512 --verbosity=5 --maxpeers=3 ${@:2}

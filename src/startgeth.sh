@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
-MY_IP=$(ip addr show eth0 | grep -Po 'inet \K[\d.]+')
+#MY_IP=$(ip addr show eth0 | grep -Po 'inet \K[\d.]+')
+MY_IP=$(ifconfig eth0 | awk '/inet addr/{print substr($2,6)}')
 GEN_ARGS=
 
 if [ "$1" == "bash" ]; then
@@ -16,6 +17,9 @@ fi
 echo "Generating genesis.alloc from arguments..."
 sed "s/\${GEN_ALLOC}/$GEN_ALLOC/g" -i /opt/genesis.json
 
+echo "Generating genesis.chainid from arguments..."
+sed "s/\${GEN_CHAIN_ID}/$GEN_CHAIN_ID/g" -i /opt/genesis.json
+
 echo "Running ethereum node with CHAIN_TYPE=$CHAIN_TYPE"
 if [ "$CHAIN_TYPE" == "private" ]; then
   # empty datadir -> geth init
@@ -26,7 +30,7 @@ if [ "$CHAIN_TYPE" == "private" ]; then
       geth --datadir "$DATA_DIR" init /opt/genesis.json
   fi
   GEN_ARGS="--datadir $DATA_DIR"
-  [[ ! -z $NET_ID ]] && GEN_ARGS="$GEN_ARGS --networkid=$NET_ID"
+#  [[ ! -z $NET_ID ]] && GEN_ARGS="$GEN_ARGS --networkid=$NET_ID"
 #  [[ ! -z $MY_IP ]] && GEN_ARGS="$GEN_ARGS --nat=extip:$MY_IP"
   [[ ! -z $BOOTNODE_URL ]] && GEN_ARGS="--bootnodes=$BOOTNODE_URL $GEN_ARGS"
 fi
@@ -40,9 +44,9 @@ if [ "$RUN_BOOTNODE" == "true" ]; then
        bootnode --genkey="$KEY_FILE"
     fi
     echo "Running bootnode with arguments '--nodekey=$KEY_FILE --addr $MY_IP:30301 $@'"
-    exec /usr/bin/bootnode --nodekey="$KEY_FILE" --addr "$MY_IP:30301" "$@"
+    exec /usr/local/bin/bootnode --nodekey="$KEY_FILE" --addr "$MY_IP:30301" "$@"
 fi
 
 echo "Running geth with arguments $GEN_ARGS $@"
-exec /usr/bin/geth $GEN_ARGS "$@"
+exec /usr/local/bin/geth $GEN_ARGS "$@"
 
