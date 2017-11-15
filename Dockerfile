@@ -1,8 +1,8 @@
 # Ethereum playground for private networks
 #
-FROM vertigo/go-ethereum:v1.6.7-all
+FROM ethereum/go-ethereum:v1.7.2
 
-MAINTAINER Andre Fernandes <andre@vertigo.com.br>
+LABEL maintainer="andre@vertigo.com.br"
 
 ENV GEN_NONCE="0xeddeadbabeeddead" \
     DATA_DIR="/root/.ethereum" \
@@ -13,7 +13,7 @@ ENV GEN_NONCE="0xeddeadbabeeddead" \
 
 WORKDIR /opt
 
-# herdados de ethereum/client-go
+# inherited from ethereum/client-go
 # EXPOSE 30303
 # EXPOSE 8545
 

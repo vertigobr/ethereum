@@ -9,7 +9,7 @@
     ${GEN_ALLOC}
   },
   "coinbase"   : "0x0000000000000000000000000000000000000000",
-  "difficulty" : "0x400",
+  "difficulty" : "0x20000",
   "extraData"  : "",
   "gasLimit"   : "0x2fefd8",
   "nonce"      : "${GEN_NONCE}",
