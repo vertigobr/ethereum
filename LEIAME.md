@@ -1,19 +1,17 @@
 Ethereum playground
 ==========
 
-Esta imagem é derivada da imagem oficial "ethereum/go-client", mas ligeiramente modificada para aceitar argumentos que simplifiquem a criação de uma rede Ethereum privada.
+Esta imagem é derivada (indiretamente) da imagem oficial "ethereum/go-client", mas ligeiramente modificada para aceitar argumentos que simplifiquem a criação de uma rede Ethereum privada com múltiplos nós. Esta imagem está publicada no Docker Hub como "vertigo/ethereum".
 
-This image is derived from  "ethereum/go-client", but slightly modified to make it simpler to run a private Ethereum network. This image is published on Docker Hub as "vertigo/ethereum".
+Alguns scripts no projeto agilizam o uso desta imagem ou mesmo permitem sua construção local. Há um artigo publicado que descreve com mais acuidade estes passos.
 
-A few scripts in this project also simplify playing with this image.
+## Definição de Rede Ethereum Privada
 
-## Network definition
+Para isolar uma rede blockchain Ethereum das redes públicas conhecidas não é necessário de forma alguma construir uma rede isolada. Os nós de uma rede privada podem ainda residir na Internet mas, pela natureza do próprio blockchain, estarão implementado uma rede fechada e privada, composta apenas por nós que compartilhem o mesmo bloco gênese. 
 
-To isolate your private Ethereum network from the main public one it does not require an isolated physical network at all. Its nodes can still reside on the Internet and yet implement a closed private Ethereum network.
+Com esta imagem - e scripts associados - o usuário pode fornecer argumentos que irão gerar um bloco gênese previsível, criando um nói em um container Docker de um mesmo blockchain Ethereum privado em qualquer host na Internet (ou rede local, ou mesmo em localhost).
 
-This image allows the user to define environment variables that will reflect on a particular (and predictable) genesis block, therefore creating an Ethereum network that cannot interact with another one. The scripts provided in this project pass along these variables when launching containers.
-
-Those variables are:
+As variáveis de ambiente passadas como argumentos pelos scripts aos containers são:
 
 * GEN_NONCE: any value your nodes agree upon, the default is "0xeddeadbabeeddead"
 * NET_ID: any integer value your nodes agree upon, the default is 1981

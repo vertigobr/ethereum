@@ -22,7 +22,6 @@ BOOTNODE_URL=${BOOTNODE_URL:-$(./getbootnodeurl.sh)}
 echo "Running new container $CONTAINER_NAME..."
 docker run -d --name $CONTAINER_NAME \
     -v $DATA_ROOT/.ether-$NODE_NAME:/root \
-    --network ethereum \
     -e "BOOTNODE_URL=$BOOTNODE_URL" \
     $NET_ARG $GEN_ARG $RPC_PORTMAP $UDP_PORTMAP \
     $IMGNAME:$IMGVERSION $RPC_ARG --identity $NODE_NAME --cache=512 --verbosity=4 --maxpeers=3 ${@:2}
