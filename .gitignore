@@ -1,4 +1,5 @@
 .ether-*
 .bootnode
 setenv.sh
+genesis.json
 
