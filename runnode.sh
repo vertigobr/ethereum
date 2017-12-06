@@ -23,7 +23,7 @@ if [ ! -d $DATA_ROOT/keystore ]; then
     docker run --rm \
         -v $DATA_ROOT:/root/.ethereum \
         -v $(pwd)/genesis.json:/opt/genesis.json \
-        $IMGNAME geth init /opt/genesis.json
+        $IMGNAME init /opt/genesis.json
     echo "...done!"
 fi
 echo "Running new container $CONTAINER_NAME..."
@@ -32,4 +32,4 @@ docker run -d --name $CONTAINER_NAME \
     -v $DATA_ROOT:/root/.ethereum \
     -v $(pwd)/genesis.json:/opt/genesis.json \
     $RPC_PORTMAP \
-    $IMGNAME geth --bootnodes=$BOOTNODE_URL $RPC_ARG --cache=512 --verbosity=6 --maxpeers=3 ${@:2}
+    $IMGNAME --bootnodes=$BOOTNODE_URL $RPC_ARG --cache=512 --verbosity=6 --maxpeers=3 ${@:2}
