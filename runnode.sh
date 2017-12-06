@@ -1,5 +1,5 @@
 #!/bin/bash
-IMGNAME="ethereum/client-go:alltools-v1.7.3"
+IMGNAME="ethereum/client-go:v1.7.3"
 NODE_NAME=$1
 NODE_NAME=${NODE_NAME:-"node1"}
 CONTAINER_NAME="ethereum-$NODE_NAME"

@@ -15,11 +15,13 @@ if [ ! -f $DATA_ROOT/.bootnode/boot.key ]; then
         $IMGNAME bootnode --genkey /opt/bootnode/boot.key
     echo "...done!"
 fi
+# creates ethereum network
+[ ! "$(docker network ls | grep ethereum)" ] && docker network create ethereum
 [[ -z $BOOTNODE_SERVICE ]] && BOOTNODE_SERVICE="127.0.0.1"
 docker run -d --name ethereum-bootnode \
     -v $DATA_ROOT/.bootnode:/opt/bootnode \
     --network ethereum \
-    $IMGNAME bootnode --nodekey /opt/bootnode/boot.key "$@"
+    $IMGNAME bootnode --nodekey /opt/bootnode/boot.key --verbosity=3 "$@"
 # --addr "$BOOTNODE_SERVICE:30301" "$@"
 
 
