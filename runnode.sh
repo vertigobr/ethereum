@@ -4,6 +4,7 @@ NODE_NAME=$1
 NODE_NAME=${NODE_NAME:-"node1"}
 CONTAINER_NAME="ethereum-$NODE_NAME"
 DATA_ROOT=${DATA_ROOT:-"$(pwd)/.ether-$NODE_NAME"}
+DATA_HASH=${DATA_HASH:-"$(pwd)/.ethash"}
 echo "Destroying old container $CONTAINER_NAME..."
 docker stop $CONTAINER_NAME
 docker rm $CONTAINER_NAME
@@ -30,6 +31,7 @@ echo "Running new container $CONTAINER_NAME..."
 docker run -d --name $CONTAINER_NAME \
     --network ethereum \
     -v $DATA_ROOT:/root/.ethereum \
+    -v $DATA_HASH:/root/.ethash \
     -v $(pwd)/genesis.json:/opt/genesis.json \
     $RPC_PORTMAP \
-    $IMGNAME --bootnodes=$BOOTNODE_URL $RPC_ARG --cache=512 --verbosity=6 --maxpeers=3 ${@:2}
+    $IMGNAME --bootnodes=$BOOTNODE_URL $RPC_ARG --cache=512 --verbosity=4 --maxpeers=3 ${@:2}

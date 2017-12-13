@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# UNCOMMENT AND COMPLETE FOR CARINA
-export CARINA_USERNAME=user@mail
-export CARINA_APIKEY=thisisonlyyours
-export CARINA_CLUSTER=ethereum
+# UNCOMMENT AND COMPLETE FOR DIGITAL OCEAN
+export DIGITALOCEAN_ACCESS_TOKEN=
 
 # UNCOMMENT BELOW AND COMPLETE FOR AZURE CLI
 export AZURE_TEMPLATE_URL=https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-acs-swarm/azuredeploy.json
