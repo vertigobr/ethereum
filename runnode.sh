@@ -2,6 +2,7 @@
 IMGNAME="ethereum/client-go:v1.7.3"
 NODE_NAME=$1
 NODE_NAME=${NODE_NAME:-"node1"}
+DETACH_FLAG=${DETACH_FLAG:-"-d"}
 CONTAINER_NAME="ethereum-$NODE_NAME"
 DATA_ROOT=${DATA_ROOT:-"$(pwd)/.ether-$NODE_NAME"}
 DATA_HASH=${DATA_HASH:-"$(pwd)/.ethash"}
@@ -28,7 +29,7 @@ if [ ! -d $DATA_ROOT/keystore ]; then
     echo "...done!"
 fi
 echo "Running new container $CONTAINER_NAME..."
-docker run -d --name $CONTAINER_NAME \
+docker run $DETACH_FLAG --name $CONTAINER_NAME \
     --network ethereum \
     -v $DATA_ROOT:/root/.ethereum \
     -v $DATA_HASH:/root/.ethash \
