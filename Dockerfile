@@ -10,17 +10,17 @@ FROM ubuntu:latest
 
 LABEL maintainer="andre@vertigo.com.br"
 
-ARG GETH_URL=https://gethstore.blob.core.windows.net/builds/geth-alltools-linux-amd64-1.7.2-1db4ecdc.tar.gz
-ARG GETH_MD5=c17c164d2d59d3972a2e6ecf922d2093
+ARG GETH_URL=https://gethstore.blob.core.windows.net/builds/geth-alltools-darwin-amd64-1.8.8-2688dab4.tar.gz
+ARG GETH_MD5=fad70120c125ff4f9e9c4ae26bb676ca
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && \
     apt install wget -y && \
     cd /tmp && \
-    wget "$GETH_URL" -q -O /tmp/geth-alltools-linux-amd64.tar.gz && \
-    echo "$GETH_MD5  geth-alltools-linux-amd64.tar.gz" > /tmp/geth-alltools-linux-amd64.tar.gz.md5 && \
-    md5sum -c /tmp/geth-alltools-linux-amd64.tar.gz.md5 && \
-    tar -xzf /tmp/geth-alltools-linux-amd64.tar.gz -C /usr/local/bin/ --strip-components=1 && \
+    wget "$GETH_URL" -q -O /tmp/geth-alltools-darwin-amd64-1.8.8-2688dab4.tar.gz && \
+    echo "$GETH_MD5  geth-alltools-darwin-amd64-1.8.8-2688dab4.tar.gz" > /tmp/geth-alltools-darwin-amd64-1.8.8-2688dab4.tar.gz.md5 && \
+    md5sum -c /tmp/geth-alltools-darwin-amd64-1.8.8-2688dab4.tar.gz.md5 && \
+    tar -xzf /tmp/geth-alltools-darwin-amd64-1.8.8-2688dab4.tar.gz -C /usr/local/bin/ --strip-components=1 && \
     rm -f /usr/local/bin/COPYING && \
     rm -f /tmp/geth-alltools-*
 
