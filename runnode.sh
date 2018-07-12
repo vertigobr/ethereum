@@ -1,5 +1,5 @@
 #!/bin/bash
-IMGNAME="ethereum/client-go:v1.7.3"
+IMGNAME="ethereum/client-go:v1.8.12"
 NODE_NAME=$1
 NODE_NAME=${NODE_NAME:-"node1"}
 DETACH_FLAG=${DETACH_FLAG:-"-d"}

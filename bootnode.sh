@@ -4,7 +4,7 @@
 #
 docker stop ethereum-bootnode
 docker rm ethereum-bootnode
-IMGNAME="ethereum/client-go:alltools-v1.7.3"
+IMGNAME="ethereum/client-go:alltools-v1.8.12"
 DATA_ROOT=${DATA_ROOT:-$(pwd)}
 # generate bootnode key if needed
 mkdir -p $DATA_ROOT/.bootnode
