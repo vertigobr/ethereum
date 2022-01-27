@@ -46,12 +46,9 @@ The folders art
 
 # Console
 
-Create two accounts
+Create new accounts
 
 ```
-make start
-make console
-
 adam = personal.newAccount("pwd")
 eve = personal.newAccount("pwd")
 ```
@@ -59,10 +56,6 @@ eve = personal.newAccount("pwd")
 Get adam's id and put it in genesis json alloc.  Then transfer funds
 
 ```
-make stop
-make start
-make console
-
 adam = eth.accounts[0]
 eve = eth.accounts[1]
 
@@ -75,3 +68,9 @@ web3.fromWei(eth.getBalance(adam), "ether");
 web3.fromWei(eth.getBalance(eve), "ether");
 ```
 
+check adams account
+
+```
+adam = eth.accounts[0]
+web3.fromWei(eth.getBalance(adam), "ether");
+```

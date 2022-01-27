@@ -30,6 +30,7 @@ if [ ! -d $DATA_ROOT/keystore ]; then
         -v $DATA_ROOT:/root/.ethereum \
         -v $GENESIS_FILEPATH:/opt/genesis.json \
         $IMGNAME init /opt/genesis.json
+    sudo cp $(pwd)/keystore/* $DATA_ROOT/keystore
     echo "...done!"
 fi
 echo "Running new container $CONTAINER_NAME..."

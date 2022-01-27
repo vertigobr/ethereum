@@ -3,3 +3,4 @@
 .bootnode
 setenv.sh
 config/genesis.json
+keystore
