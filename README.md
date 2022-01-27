@@ -118,5 +118,33 @@ Mining can take quite a long time to run for the first time. Onde again, to chec
 docker logs -f ethereum-miner1
 ```
 
+# My notes
 
+Create two accounts
+
+```
+make start
+make console
+
+adam = personal.newAccount("pwd")
+eve = personal.newAccount("pwd")
+```
+
+Get adam's id and put it in genesis json alloc.  Then transfer funds
+
+```
+make stop
+make start
+make console
+
+adam = eth.accounts[0]
+eve = eth.accounts[1]
+
+personal.unlockAccount(adam,'pwd',0)
+personal.unlockAccount(eve,'pwd',0)
+eth.sendTransaction({from: adam, to: eve, value: web3.toWei(4, "ether")})
+
+web3.fromWei(eth.getBalance(adam), "ether");
+web3.fromWei(eth.getBalance(eve), "ether");
+```
 
