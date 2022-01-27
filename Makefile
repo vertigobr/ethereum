@@ -2,6 +2,9 @@
 #https://medium.com/@kacharlabhargav21/connecting-geth-to-metamask-fc2b2c89d9f9
 #https://web3js.readthedocs.io/en/v1.2.11/web3-eth.html#eth-sendtransaction
 #https://geth.ethereum.org/docs/interface/managing-your-accounts
+init:
+	@./bin/genesis.sh
+	@echo "generated file config/genesis.json"
 
 start:
 	./bootnode.sh

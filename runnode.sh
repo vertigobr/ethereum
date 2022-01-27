@@ -9,6 +9,7 @@ DATA_HASH=${DATA_HASH:-"$(pwd)/.ethash"}
 echo "Destroying old container $CONTAINER_NAME..."
 docker stop $CONTAINER_NAME
 docker rm $CONTAINER_NAME
+GENESIS_FILEPATH=$(pwd)/config/genesis.json
 RPC_PORTMAP=
 RPC_ARG=
 
@@ -19,7 +20,7 @@ if [[ ! -z $RPC_PORT ]]; then
     RPC_PORTMAP="-p $RPC_PORT:8545"
 fi
 BOOTNODE_URL=${BOOTNODE_URL:-$(./getbootnodeurl.sh)}
-if [ ! -f $(pwd)/genesis.json ]; then
+if [ ! -f $GENESIS_FILEPATH ]; then
     echo "No genesis.json file found, please run 'genesis.sh'. Aborting."
     exit
 fi
@@ -27,7 +28,7 @@ if [ ! -d $DATA_ROOT/keystore ]; then
     echo "$DATA_ROOT/keystore not found, running 'geth init'..."
     docker run --rm \
         -v $DATA_ROOT:/root/.ethereum \
-        -v $(pwd)/genesis.json:/opt/genesis.json \
+        -v $GENESIS_FILEPATH:/opt/genesis.json \
         $IMGNAME init /opt/genesis.json
     echo "...done!"
 fi
@@ -36,6 +37,6 @@ docker run $DETACH_FLAG --name $CONTAINER_NAME \
     --network ethereum \
     -v $DATA_ROOT:/root/.ethereum \
     -v $DATA_HASH:/root/.ethash \
-    -v $(pwd)/genesis.json:/opt/genesis.json \
+    -v $GENESIS_FILEPATH:/opt/genesis.json \
     $RPC_PORTMAP \
     $IMGNAME --bootnodes=$BOOTNODE_URL $RPC_ARG --cache=512 --verbosity=4 --maxpeers=3 ${@:2}

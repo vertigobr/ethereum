@@ -142,6 +142,7 @@ eve = eth.accounts[1]
 
 personal.unlockAccount(adam,'pwd',0)
 personal.unlockAccount(eve,'pwd',0)
+
 eth.sendTransaction({from: adam, to: eve, value: web3.toWei(4, "ether")})
 
 web3.fromWei(eth.getBalance(adam), "ether");
