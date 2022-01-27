@@ -13,17 +13,27 @@ start:
 	./runminer.sh miner1
 
 stop:
-	./killall.sh
+	./bin/killall.sh
 
 clean:
-	sudo rm -rf .eth*
-	./wipeall.sh
+	./bin/wipeall.sh
+	sudo rm -Rf .ether-*
+	sudo rm -Rf .ethash
+	sudo rm -Rf .bootnode
 
-console:
-	./runattach.sh ethereum-miner1
+attach_node:
+	./bin/runattach.sh ethereum-node1
 
-peers:
-	./showpeers.sh
+attach_miner:
+	./bin/runattach.sh ethereum-miner1
 
+bash:
+	./bin/runbash.sh
+
+node_peers:
+	./bin/showpeers.sh node1
+
+miner_peers:
+	./bin/showpeers.sh miner1
 ps:
 	docker ps

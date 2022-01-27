@@ -19,7 +19,7 @@ if [[ ! -z $RPC_PORT ]]; then
     RPC_ARG='--rpc --rpcaddr=0.0.0.0 --rpcport 8545 --rpcapi=db,eth,net,web3,personal --rpccorsdomain "*"'
     RPC_PORTMAP="-p $RPC_PORT:8545"
 fi
-BOOTNODE_URL=${BOOTNODE_URL:-$(./getbootnodeurl.sh)}
+BOOTNODE_URL=${BOOTNODE_URL:-$(./bin/getbootnodeurl.sh)}
 if [ ! -f $GENESIS_FILEPATH ]; then
     echo "No genesis.json file found, please run 'genesis.sh'. Aborting."
     exit
