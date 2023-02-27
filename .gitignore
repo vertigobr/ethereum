@@ -2,5 +2,5 @@
 .ethash
 .bootnode
 setenv.sh
-genesis.json
-
+config/genesis.json
+keystore
